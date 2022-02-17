@@ -15,7 +15,7 @@ export class HomePage {
 
   clickedImage: string;
   // Firestore data
-  result$: Observable<any>;
+  result: any= null;
   image: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
   loadinng:  LoadingOptions;
@@ -40,7 +40,8 @@ export class HomePage {
       await worker.loadLanguage('eng');
       await worker.initialize('eng');
       const { data: { text } } = await worker.recognize(base64Image);
-      console.log('texto extraido de la imagen: ' +text);
+      this.result = text;
+
       await worker.terminate();
       console.log('finish');
     })();
@@ -85,7 +86,10 @@ export class HomePage {
     });
   }
 
+  //extractName(  )
+
   extractEmail(str: string) {
+    console.log(str);
     // eslint-disable-next-line max-len
     const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
     const {matches, cleanedText} = this.removeByRegex(str, emailRegex);
@@ -93,10 +97,41 @@ export class HomePage {
   };
 
   extractContact(str: string) {
+    console.log(str);
     const contactRegex = /(?:(\+?\d{1,3}) )?(?:([\(]?\d+[\)]?)[ -])?(\d{1,5}[\- ]?\d{1,5})/;
     const {matches, cleanedText} = this.removeByRegex(str, contactRegex);
     return matches;
   }
+
+  extractName(str: string) {
+    console.log(str);
+    const nameRegex = /(?:([A-Z]{1}[a-z]+))(?:[\s]*)(?:([A-Z]{1}[a-z]+))/;
+    const {matches, cleanedText} = this.removeByRegex(str, nameRegex);
+    return matches;
+  }
+
+  extractAddress(str: string) {
+    console.log(str);
+    const addressRegex = /(?:([A-Z]{1}[a-z]+))(?:[\s]*)(?:([A-Z]{1}[a-z]+))/;
+    const {matches, cleanedText} = this.removeByRegex(str, addressRegex);
+    return matches;
+  }
+
+  extractDate(str: string) {
+    console.log(str);
+    const dateRegex = /(?:([A-Z]{1}[a-z]+))(?:[\s]*)(?:([A-Z]{1}[a-z]+))/;
+    const {matches, cleanedText} = this.removeByRegex(str, dateRegex);
+    return matches;
+  }
+
+  extractWebsite(str: string) {
+    console.log(str);
+    const websiteRegex = /(?:([A-Z]{1}[a-z]+))(?:[\s]*)(?:([A-Z]{1}[a-z]+))/;
+    const {matches, cleanedText} = this.removeByRegex(str, websiteRegex);
+    return matches;
+  }
+
+  //extrer solo website
 
   removeByRegex(str, regex) {
     const matches = [];
