@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "scan-businnesCard",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

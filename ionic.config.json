@@ -1,0 +1,10 @@
+{
+  "name": "scan-businnesCard",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}

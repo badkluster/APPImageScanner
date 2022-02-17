@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Camara Scanner </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+  <ion-row>
+    <div class="container">
+      <ion-col col-12 text-center>
+        <ion-button (click)="captureImage()"> Click Picture </ion-button>
+      </ion-col>
+    </div>
+    <ion-col col-12>
+      <img width="100%" height="auto" [src]="clickedImage" />
+    </ion-col>
+    <ion-col *ngIf="result$ | async as result">
+      <h4>
+        <span class="title">Name: </span><br />
+        {{result.requiredEntities.PERSON}}
+      </h4>
+      <h4>
+        <span class="title">Email:</span><br />
+        <span *ngFor="let email of extractEmail(result.text)"
+          >{{email}}<br
+        /></span>
+      </h4>
+      <h4>
+        <span class="title">Number Phone:</span><br />
+        <span *ngFor="let phone of extractContact(result.text)"
+          >{{phone}}<br
+        /></span>
+      </h4>
+      <h4>
+        <span class="title">organization:</span><br />
+        {{result.requiredEntities.ORGANIZATION}}
+      </h4>
+      <h4>
+        <span class="title">Localizacion:</span><br />
+        {{result.requiredEntities.LOCATION}}
+      </h4>
+
+      <h4><span class="title">Texto reconocido</span></h4>
+
+      <h5>{{result.text}}</h5>
+    </ion-col>
+  </ion-row>
+</ion-content>
